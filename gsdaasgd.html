@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>İMPARATORLUK — Team Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#0f172a;--accent:#ffd54a;--neon:#7cf7ff;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Poppins',sans-serif;background: radial-gradient(1200px 600px at 10% 10%, rgba(124,247,255,0.06), transparent),radial-gradient(900px 400px at 95% 90%, rgba(255,213,74,0.04), transparent),linear-gradient(180deg,var(--bg1), #071020 120%);color:#e6f0ff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;flex-direction:column;}
+.container{width:100%;max-width:1100px;text-align:center;}
+.title{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:22px;}
+.crown{width:64px;height:64px;display:grid;place-items:center;background:linear-gradient(180deg,#ffd54a,#ffb400);border-radius:14px;box-shadow:0 6px 30px rgba(255,181,0.14),0 0 28px rgba(124,247,255,0.06) inset;transform:rotate(-8deg);}
+h1{font-size:38px;margin:0;font-weight:900;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(90deg,#fff 0%, #d6f6ff 40%, #ffd54a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+p.lead{margin-top:6px;color:rgba(230,240,255,0.75);font-weight:500;}
+.grid{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px;}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px);transition:transform .35s cubic-bezier(.2,.9,.2,1),box-shadow .35s;position:relative;overflow:hidden;}
+.card:hover{transform:translateY(-10px) rotate(-1deg);box-shadow:0 18px 40px rgba(0,0,0,0.5);}
+.avatar{width:88px;height:88px;border-radius:50%;margin:0 auto 12px;display:block;border:4px solid rgba(124,247,255,0.12);padding:4px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 6px 18px rgba(0,0,0,0.45),0 0 24px rgba(124,247,255,0.02) inset;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.name{font-weight:700;margin:6px 0 4px;font-size:16px;letter-spacing:0.6px;}
+.role{font-size:12px;color:rgba(230,240,255,0.6);}
+.neon{position:absolute;right:12px;top:12px;padding:6px 10px;border-radius:999px;font-weight:700;font-size:11px;box-shadow:0 6px 28px rgba(124,247,255,0.06),0 0 18px rgba(124,247,255,0.06) inset;border:1px solid rgba(124,247,255,0.06);text-transform:uppercase;color:var(--neon);transform:translateY(-6px);}
+.title-underline{height:6px;width:220px;margin:18px auto 0;border-radius:999px;background:linear-gradient(90deg,#7cf7ff,#ffd54a);opacity:0.18;}
+.footer{margin-top:18px;color:rgba(230,240,255,0.5);font-size:13px;}
+@media(max-width:520px){h1{font-size:26px}.crown{width:50px;height:50px}}
+.crown-wrap{position:relative;}
+.crown-badge{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:32px;filter:drop-shadow(0 0 6px rgba(255,213,74,0.6));}
+.sponsors{margin-top:40px;overflow:hidden;position:relative;height:60px;display:flex;align-items:center;background:rgba(255,255,255,0.02);border-radius:12px;padding:0 10px;}
+.sponsors-inner{display:flex;gap:40px;animation:scrollSponsors 20s linear infinite;}
+@keyframes scrollSponsors{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+.sponsor-card{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.1);flex-shrink:0;background:rgba(0,0,0,0.15);}
+.sponsor-card img{height:32px;object-fit:contain;}
+.sponsor-card span{color:#7cf7ff;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="title">
+    <div class="crown" aria-hidden>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7l4 10h10l4-10-6 4-4-6-4 6-6-4z" fill="#fff" opacity="0.95"/></svg>
+    </div>
+    <div>
+      <h1>İMPARATORLUK</h1>
+      <p class="lead"> Göz kamaştıran. KADRO!!.</p>
+    </div>
+  </div>
+  <div class="title-underline" aria-hidden></div>
+  <div id="leader"></div>
+  <div id="grid" class="grid" role="list"></div>
+  <div class="sponsors" id="sponsors"></div>
+  <div class="footer">Bu sayfa tek dosya HTML. İsimleri ve resimleri değiştirmek için <code>leaderPic</code> ve <code>teamPics</code> dizilerini düzenleyin.</div>
+</div>
+
+<script>
+// Takım isimleri
+const teamNames=['ash5000','sxrd4r987','erennkesk1n','prestigejesus','lancaster.muzik','chavokefo','astroresmi','utku.kesskin','feerley','berlincxn','chaveflex'];
+
+// Üye fotoğrafları: boş bırakabilirsin, yoksa otomatik avatar üretilecek
+const teamPics=[
+  'https://cdn.discordapp.com/attachments/1370474021174382614/1438989473068093470/eba78b09c0605392f657d18f3f0ded5d.webp?ex=6918e2e1&is=69179161&hm=19818a799c78020f94cfb03286f4f2c85288343e94751dd80a149c02f5e6cb09&', // sxrd4987
+  'https://cdn.discordapp.com/avatars/1148024228306759744/d528cf844f329026cb2c44d47e26bd3c.webp?size=60', // erennkesk1n
+  'https://cdn.discordapp.com/avatars/1257453794346930316/1861c0bbd2691f94bf8e208ea139e77f.webp?size=60', // prestigejesus
+  'https://cdn.discordapp.com/avatars/1328013599695704134/b55a71fe842b55eb3794569fee6f43c5.webp?size=60', // lancaster.muzik
+  'https://cdn.discordapp.com/avatars/535417343854247936/4b29c83b2b3795228c16ebfb817e383f.webp?size=60', // CHAVO
+  'https://cdn.discordapp.com/avatars/848156613642813461/df208e25c333814a97af405e0ba582b0.webp?size=60', // astroresmi
+  'https://cdn.discordapp.com/avatars/447714665334571009/d84a917247e10617d73dbfe322f0f16c.webp?size=60', // utku.kesskin
+  'https://cdn.discordapp.com/avatars/789404176391602206/83888ad5abd3a8e172ac4c210574e77b.webp?size=60', // k4xnkeskin
+  'https://cdn.discordapp.com/attachments/1412176178256674876/1438990587968884856/ecebfa551b9439b2f3f547375196a402.webp?ex=6918e3eb&is=6917926b&hm=95851253f98113b8c12f601b013f67b8c7ddd1db3af0a72faab1389b7eff961b&', // berlincxn
+  'https://cdn.discordapp.com/attachments/1433022298344001556/1438990335018532997/283336f9aaf34f6714f9e335f246abe2.webp?ex=6918e3af&is=6917922f&hm=8cf5e236f1ce8f4f8138ece45fb9bd12b3c645ac66eb1dbd48d66b030630cb00&'  // bberat_06
+];
+
+// Lider fotoğrafı: boş bırakılırsa otomatik avatar kullanılır
+const leaderPic = 'https://cdn.discordapp.com/attachments/1370474021174382614/1438990123650908170/167f32052dad53251775a83ac5fe1281.png?ex=6918e37c&is=691791fc&hm=4ebaae00d9c9aab5ee3957fa800022b16bbf2373e7f9aab71f32da697ee4b1cc&'; // BURAYA LİDERİN FOTOĞRAF LINKİNİ KOY
+
+// Otomatik avatar üretme
+function makeAvatarUrl(name){
+  const initials = name.split(' ').map(s=>s[0]||'').join('').slice(0,2).toUpperCase();
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><rect width='100%' height='100%' fill='%230a2030'/><text x='50%' y='50%' dy='12' font-family='Poppins, sans-serif' font-size='96' fill='%23ffffff' text-anchor='middle'>${initials}</text></svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+// Lider kartı
+const leader = document.createElement('div');
+leader.className='card';
+leader.innerHTML=`
+  <div class="neon">Lider</div>
+  <div class="avatar crown-wrap">
+    <div class="crown-badge">👑</div>
+    <img src="${leaderPic ? leaderPic : makeAvatarUrl(teamNames[0])}" alt="${teamNames[0]} avatar">
+  </div>
+  <div class="name" style="font-size:20px;">${teamNames[0]}</div>
+  <div class="role">İmparatorluk Lideri</div>
+`;
+leader.style.maxWidth='260px';
+leader.style.margin='0 auto 30px auto';
+document.getElementById('leader').appendChild(leader);
+
+// Üye kartları
+const grid = document.getElementById('grid');
+teamNames.slice(1).forEach((name,index)=>{
+  const pic = teamPics[index] ? teamPics[index] : makeAvatarUrl(name);
+  const card = document.createElement('div');
+  card.className='card';
+  card.innerHTML=`
+    <div class="neon">Üye</div>
+    <div class="avatar"><img src="${pic}" alt="${name} avatar"></div>
+    <div class="name">${name}</div>
+    <div class="role">İmparatorluk Üyesi</div>
+  `;
+  grid.appendChild(card);
+});
+
+// Sponsorlar (örnek, kendi logolarını buraya ekle)
+const sponsorsList=[
+
+  {name:'Nike', logo:'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg'}
+];
+const sponsorsContainer = document.getElementById('sponsors');
+const innerDiv = document.createElement('div');
+innerDiv.className='sponsors-inner';
+sponsorsContainer.appendChild(innerDiv);
+sponsorsList.forEach(s=>{
+  const div = document.createElement('div');
+  div.className='sponsor-card';
+  div.innerHTML=`<img src="${s.logo}" alt="${s.name}"><span>${s.name}</span>`;
+  innerDiv.appendChild(div);
+});
+</script>
+
+</body>
+</html>
