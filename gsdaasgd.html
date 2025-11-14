@@ -33,6 +33,12 @@ p.lead{margin-top:6px;color:rgba(230,240,255,0.75);font-weight:500;}
 .sponsor-card{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.1);flex-shrink:0;background:rgba(0,0,0,0.15);}
 .sponsor-card img{height:32px;object-fit:contain;}
 .sponsor-card span{color:#7cf7ff;font-weight:700;}
+
+/* 404 sayfası için gizleme */
+#notfound{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#0f172a;color:#e6f0ff;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;}
+#notfound h1{font-size:72px;margin:0;}
+#notfound p{font-size:18px;color:rgba(230,240,255,0.7);}
+#notfound a{color:#ffd54a;text-decoration:none;margin-top:20px;}
 </style>
 </head>
 <body>
@@ -53,28 +59,35 @@ p.lead{margin-top:6px;color:rgba(230,240,255,0.75);font-weight:500;}
   <div class="footer">Bu sayfa tek dosya HTML. İsimleri ve resimleri değiştirmek için <code>leaderPic</code> ve <code>teamPics</code> dizilerini düzenleyin.</div>
 </div>
 
+<!-- 404 ekranı -->
+<div id="notfound">
+  <h1>404</h1>
+  <p>Üzgünüz, bu sayfa bulunamadı.</p>
+  <a href="index.html">Ana Sayfaya Dön</a>
+</div>
+
 <script>
 // Takım isimleri
 const teamNames=['ash5000','sxrd4r987','erennkesk1n','prestigejesus','lancaster.muzik','chavokefo','astroresmi','utku.kesskin','feerley','berlincxn','chaveflex'];
 
-// Üye fotoğrafları: boş bırakabilirsin, yoksa otomatik avatar üretilecek
+// Üye fotoğrafları
 const teamPics=[
-  'https://cdn.discordapp.com/attachments/1370474021174382614/1438989473068093470/eba78b09c0605392f657d18f3f0ded5d.webp?ex=6918e2e1&is=69179161&hm=19818a799c78020f94cfb03286f4f2c85288343e94751dd80a149c02f5e6cb09&', // sxrd4987
-  'https://cdn.discordapp.com/avatars/1148024228306759744/d528cf844f329026cb2c44d47e26bd3c.webp?size=60', // erennkesk1n
-  'https://cdn.discordapp.com/avatars/1257453794346930316/1861c0bbd2691f94bf8e208ea139e77f.webp?size=60', // prestigejesus
-  'https://cdn.discordapp.com/avatars/1328013599695704134/b55a71fe842b55eb3794569fee6f43c5.webp?size=60', // lancaster.muzik
-  'https://cdn.discordapp.com/avatars/535417343854247936/4b29c83b2b3795228c16ebfb817e383f.webp?size=60', // CHAVO
-  'https://cdn.discordapp.com/avatars/848156613642813461/df208e25c333814a97af405e0ba582b0.webp?size=60', // astroresmi
-  'https://cdn.discordapp.com/avatars/447714665334571009/d84a917247e10617d73dbfe322f0f16c.webp?size=60', // utku.kesskin
-  'https://cdn.discordapp.com/avatars/789404176391602206/83888ad5abd3a8e172ac4c210574e77b.webp?size=60', // k4xnkeskin
-  'https://cdn.discordapp.com/attachments/1412176178256674876/1438990587968884856/ecebfa551b9439b2f3f547375196a402.webp?ex=6918e3eb&is=6917926b&hm=95851253f98113b8c12f601b013f67b8c7ddd1db3af0a72faab1389b7eff961b&', // berlincxn
-  'https://cdn.discordapp.com/attachments/1433022298344001556/1438990335018532997/283336f9aaf34f6714f9e335f246abe2.webp?ex=6918e3af&is=6917922f&hm=8cf5e236f1ce8f4f8138ece45fb9bd12b3c645ac66eb1dbd48d66b030630cb00&'  // bberat_06
+  'https://cdn.discordapp.com/attachments/1370474021174382614/1438989473068093470/eba78b09c0605392f657d18f3f0ded5d.webp?ex=6918e2e1&is=69179161&hm=19818a799c78020f94cfb03286f4f2c85288343e94751dd80a149c02f5e6cb09&',
+  'https://cdn.discordapp.com/avatars/1148024228306759744/d528cf844f329026cb2c44d47e26bd3c.webp?size=60',
+  'https://cdn.discordapp.com/avatars/1257453794346930316/1861c0bbd2691f94bf8e208ea139e77f.webp?size=60',
+  'https://cdn.discordapp.com/avatars/1328013599695704134/b55a71fe842b55eb3794569fee6f43c5.webp?size=60',
+  'https://cdn.discordapp.com/avatars/535417343854247936/4b29c83b2b3795228c16ebfb817e383f.webp?size=60',
+  'https://cdn.discordapp.com/avatars/848156613642813461/df208e25c333814a97af405e0ba582b0.webp?size=60',
+  'https://cdn.discordapp.com/avatars/447714665334571009/d84a917247e10617d73dbfe322f0f16c.webp?size=60',
+  'https://cdn.discordapp.com/avatars/789404176391602206/83888ad5abd3a8e172ac4c210574e77b.webp?size=60',
+  'https://cdn.discordapp.com/attachments/1412176178256674876/1438990587968884856/ecebfa551b9439b2f3f547375196a402.webp?ex=6918e3eb&is=6917926b&hm=95851253f98113b8c12f601b013f67b8c7ddd1db3af0a72faab1389b7eff961b&',
+  'https://cdn.discordapp.com/attachments/1433022298344001556/1438990335018532997/283336f9aaf34f6714f9e335f246abe2.webp?ex=6918e3af&is=6917922f&hm=8cf5e236f1ce8f4f8138ece45fb9bd12b3c645ac66eb1dbd48d66b030630cb00&'
 ];
 
-// Lider fotoğrafı: boş bırakılırsa otomatik avatar kullanılır
-const leaderPic = 'https://cdn.discordapp.com/attachments/1370474021174382614/1438990123650908170/167f32052dad53251775a83ac5fe1281.png?ex=6918e37c&is=691791fc&hm=4ebaae00d9c9aab5ee3957fa800022b16bbf2373e7f9aab71f32da697ee4b1cc&'; // BURAYA LİDERİN FOTOĞRAF LINKİNİ KOY
+// Lider fotoğrafı
+const leaderPic = 'https://cdn.discordapp.com/attachments/1370474021174382614/1438990123650908170/167f32052dad53251775a83ac5fe1281.png?ex=6918e37c&is=691791fc&hm=4ebaae00d9c9aab5ee3957fa800022b16bbf2373e7f9aab71f32da697ee4b1cc&';
 
-// Otomatik avatar üretme
+// Otomatik avatar
 function makeAvatarUrl(name){
   const initials = name.split(' ').map(s=>s[0]||'').join('').slice(0,2).toUpperCase();
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><rect width='100%' height='100%' fill='%230a2030'/><text x='50%' y='50%' dy='12' font-family='Poppins, sans-serif' font-size='96' fill='%23ffffff' text-anchor='middle'>${initials}</text></svg>`;
@@ -112,11 +125,8 @@ teamNames.slice(1).forEach((name,index)=>{
   grid.appendChild(card);
 });
 
-// Sponsorlar (örnek, kendi logolarını buraya ekle)
-const sponsorsList=[
-
-  {name:'Nike', logo:'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg'}
-];
+// Sponsorlar
+const sponsorsList=[{name:'Nike', logo:'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg'}];
 const sponsorsContainer = document.getElementById('sponsors');
 const innerDiv = document.createElement('div');
 innerDiv.className='sponsors-inner';
@@ -127,7 +137,12 @@ sponsorsList.forEach(s=>{
   div.innerHTML=`<img src="${s.logo}" alt="${s.name}"><span>${s.name}</span>`;
   innerDiv.appendChild(div);
 });
-</script>
 
+// Basit 404 yönlendirme (Vercel için)
+if(window.location.pathname !== '/' && window.location.pathname !== '/index.html'){
+  document.querySelector('.container').style.display='none';
+  document.getElementById('notfound').style.display='flex';
+}
+</script>
 </body>
 </html>
